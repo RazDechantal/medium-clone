@@ -1,0 +1,14 @@
+src/
+|-- components/
+|   |-- BlogPost.js
+|   |-- BlogPostList.js
+|   |-- Comment.js
+|   |-- CommentList.js
+|-- context/
+|   |-- UserContext.js
+|   |-- BlogContext.js
+|-- pages/
+|   |-- HomePage.js
+|   |-- MyPostsPage.js
+|-- App.js
+|-- index.js

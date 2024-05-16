@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import { BlogProvider } from './context/BlogContext';
 import HomePage from './pages/HomePage';
 import MyPostsPage from './pages/MyPostsPage';
-import './App.css'; // Import the CSS file
 
 const App = () => {
   return (
@@ -15,12 +14,10 @@ const App = () => {
             <Link to="/">Home</Link>
             <Link to="/myposts">My Posts</Link>
           </nav>
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/myposts" element={<MyPostsPage />} />
-            </Routes>
-          </div>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/myposts" component={MyPostsPage} />
+          </Switch>
         </BlogProvider>
       </UserProvider>
     </Router>
