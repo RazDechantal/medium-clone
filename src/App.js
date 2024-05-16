@@ -1,28 +1,34 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import { UserProvider } from './context/UserContext';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import { BlogProvider } from './context/BlogContext';
 import HomePage from './pages/HomePage';
 import MyPostsPage from './pages/MyPostsPage';
-import './App.css'; // Import the CSS file
+import LoginPage from './pages/LoginPage';
+import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
+import './App.css';
 
 const App = () => {
   return (
     <Router>
-      <UserProvider>
+      <AuthProvider>
         <BlogProvider>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/myposts">My Posts</Link>
-          </nav>
+          <Navbar />
           <div className="container">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/myposts" element={<MyPostsPage />} />
+              <Route path="/myposts" element={
+                <PrivateRoute>
+                  <MyPostsPage />
+                </PrivateRoute>
+              } />
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
           </div>
         </BlogProvider>
-      </UserProvider>
+      </AuthProvider>
     </Router>
   );
 };
