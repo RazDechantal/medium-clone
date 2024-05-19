@@ -1,3 +1,4 @@
+// src/components/BlogPostList.js
 import React, { useContext } from 'react';
 import { BlogContext } from '../context/BlogContext';
 import BlogPost from './BlogPost';

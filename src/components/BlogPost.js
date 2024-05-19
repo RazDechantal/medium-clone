@@ -1,10 +1,11 @@
+// src/components/BlogPost.js
 import React, { useContext, useState } from 'react';
 import { BlogContext } from '../context/BlogContext';
-import { UserContext } from '../context/UserContext';
+import { useAuth } from '../context/AuthContext';
 import CommentList from './CommentList';
 
 const BlogPost = ({ post }) => {
-  const { user } = useContext(UserContext);
+  const { currentUser } = useAuth();
   const { updatePost, deletePost, addComment } = useContext(BlogContext);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -22,8 +23,12 @@ const BlogPost = ({ post }) => {
   };
 
   const handleAddComment = () => {
-    addComment(post.id, user.name, commentText);
-    setCommentText('');
+    if (currentUser) {
+      addComment(post.id, currentUser.email, commentText);
+      setCommentText('');
+    } else {
+      alert('You must be logged in to comment');
+    }
   };
 
   return (
@@ -41,7 +46,7 @@ const BlogPost = ({ post }) => {
           <p className="author">By {post.author}</p>
         </>
       )}
-      {user.name === post.author && (
+      {currentUser && currentUser.email === post.author && (
         <div className="actions">
           <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
           <button onClick={handleDelete}>Delete</button>

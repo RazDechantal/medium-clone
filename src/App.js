@@ -6,6 +6,7 @@ import { BlogProvider } from './context/BlogContext';
 import HomePage from './pages/HomePage';
 import MyPostsPage from './pages/MyPostsPage';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import './App.css';
@@ -25,6 +26,7 @@ const App = () => {
                 </PrivateRoute>
               } />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
             </Routes>
           </div>
         </BlogProvider>
